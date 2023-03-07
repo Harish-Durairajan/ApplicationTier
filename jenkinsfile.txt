@@ -1,0 +1,56 @@
+pipeline{
+    agent any
+    stages{
+        stage("clean workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("checking out from github"){
+            steps{
+                checkout scmGit(branches: [[name: '*/${Branch}']], 
+                userRemoteConfigs: [[url: '${git_url}']])
+            }
+        }   
+          
+        stage("docker logging"){
+            steps{
+                sh "echo harish | sudo -S docker images > /dev/null"
+                // sh "docker login -p ${$DOCKER_PASSWORD}"
+                // sh "docker login --username foo --password-stdin < ~/my_password"
+                // -u ${$DOCKER_USERNAME}
+            }
+        }    
+        stage("checking docker deamon running"){
+            steps{
+                sh "sudo docker images > /dev/null"
+            }
+        }
+        stage("installing maven"){
+            steps{
+                sh "mvn clean"
+                sh "mvn install"
+            }
+        }
+        stage("Building the image file"){
+            steps{
+                sh "sudo docker build -t ${imageName}"
+            }
+        }
+        stage("createing the container"){
+            steps{
+                sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
+            }
+        }
+        stage("tagging the image file"){
+            steps{
+                sh "sudo docker tag ${imageName}:${tagName} ${repositoryName}:${tagName}"
+            }
+        }
+        stage("pushing the image in docker hub"){
+            steps{
+                sh "sudo docker push ${repositoryName}:${tagName}"
+            }
+        }
+    }
+}
