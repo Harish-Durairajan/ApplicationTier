@@ -34,7 +34,7 @@ pipeline{
         }
         stage("Building the image file"){
             steps{
-                sh "sudo docker build -t ${imageName}"
+                sh "sudo docker build -t ${imageName}."
             }
         }
         stage("createing the container"){
@@ -44,12 +44,12 @@ pipeline{
         }
         stage("tagging the image file"){
             steps{
-                sh "sudo docker tag ${imageName}:${tagName} ${repositoryName}:${tagName}"
+                sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
             }
         }
         stage("pushing the image in docker hub"){
             steps{
-                sh "sudo docker push ${repositoryName}:${tagName}"
+                sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
         }
     }
