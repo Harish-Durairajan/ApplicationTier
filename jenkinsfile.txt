@@ -49,7 +49,7 @@ pipeline{
         }        
         stage("pushing the image in docker hub"){
             steps{
-                sh "docker pull harishdurai/applicationtier:${tagName}"
+                sh "sudo docker pull harishdurai/applicationtier:${tagName}"
             }
         }
         stage("createing the container"){
