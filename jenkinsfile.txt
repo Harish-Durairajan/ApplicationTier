@@ -36,12 +36,7 @@ pipeline{
             steps{
                 sh "sudo docker build -t ${imageName}."
             }
-        }
-        stage("createing the container"){
-            steps{
-                sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
-            }
-        }
+        }        
         stage("tagging the image file"){
             steps{
                 sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
@@ -50,6 +45,16 @@ pipeline{
         stage("pushing the image in docker hub"){
             steps{
                 sh "sudo docker push harishdurai/applicationtier:${tagName}"
+            }
+        }        
+        stage("pushing the image in docker hub"){
+            steps{
+                sh "docker pull harishdurai/applicationtier:${tagName}"
+            }
+        }
+        stage("createing the container"){
+            steps{
+                sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
             }
         }
     }
