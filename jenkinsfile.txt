@@ -47,7 +47,7 @@ pipeline{
                 sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
         }        
-        stage("pushing the image in docker hub"){
+        stage("pulling the image from docker hub"){
             steps{
                 sh "sudo docker pull harishdurai/applicationtier:${tagName}"
             }
