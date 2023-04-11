@@ -36,7 +36,7 @@ pipeline{
         }        
         stage("tagging the image file"){
             steps{
-                sh "docker tag hello-world:latest AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
+                sh "docker tag ${imageName} AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
                 //sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
             }
         } 
