@@ -7,8 +7,8 @@ metadata:
 spec:
   selector:
     app: spring
-  type: LoadBalancer
   ports:
     - targetPort: 8080
+  type: LoadBalancer
 
 
