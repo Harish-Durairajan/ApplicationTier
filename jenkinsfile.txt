@@ -16,9 +16,6 @@ pipeline{
         stage("docker logging"){
             steps{
                 sh "echo harish | sudo -S docker images > /dev/null"
-                // sh "docker login -p ${$DOCKER_PASSWORD}"
-                // sh "docker login --username foo --password-stdin < ~/my_password"
-                // -u ${$DOCKER_USERNAME}
             }
         }    
         stage("checking docker deamon running"){
@@ -39,23 +36,31 @@ pipeline{
         }        
         stage("tagging the image file"){
             steps{
-                sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
+                sh "docker tag hello-world:latest AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
+                //sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
             }
-        }
+        } 
         stage("pushing the image in docker hub"){
             steps{
-                sh "sudo docker push harishdurai/applicationtier:${tagName}"
+                sh "docker push AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository "
+                //sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
-        }        
-        stage("pulling the image from docker hub"){
+        } 
+        stage("Deploying dockerfile"){
             steps{
-                sh "sudo docker pull harishdurai/applicationtier:${tagName}"
+                sh "kubernetes apply -f springDeployment.yaml"
+                sh "kubernetes apply -f springService.yaml"
             }
-        }
-        stage("createing the container"){
-            steps{
-                sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
-            }
-        }
+        }       
+        // stage("pulling the image from docker hub"){
+        //     steps{
+        //         sh "sudo docker pull harishdurai/applicationtier:${tagName}"
+        //     }
+        // }
+        // stage("createing the container"){
+        //     steps{
+        //         sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
+        //     }
+        // }
     }
 }
