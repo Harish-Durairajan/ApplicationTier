@@ -53,7 +53,7 @@ pipeline{
         stage("pushing the image in ECR "){
             steps{
                 // sh "docker push 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest"
-                sh "docker push ${imageName} AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest"
+                sh "docker push AKIAY6DW5YU3KC3254E5.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
                 //sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
         } 
