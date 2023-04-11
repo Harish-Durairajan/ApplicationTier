@@ -9,7 +9,6 @@ spec:
     app: spring
   type: LoadBalancer
   ports:
-    - nodePort: 30515
-      targetPort: 8080
+    - targetPort: 8080
 
 
