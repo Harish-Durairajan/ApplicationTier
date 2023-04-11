@@ -59,8 +59,8 @@ pipeline{
         } 
         stage("Deploying dockerfile"){
             steps{
-                sh "kubernetes apply -f springDeployment.yaml"
-                sh "kubernetes apply -f springService.yaml"
+                sh "kubectl apply -f springDeployment.yaml"
+                sh "kubectl apply -f springService.yaml"
             }
         }       
         // stage("pulling the image from docker hub"){
