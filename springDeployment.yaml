@@ -16,6 +16,6 @@ spec:
         - name: webserver1
           image: 'harishdurai/applicationtier:latest'
           ports:
-            - containerPort: 8082
+            - containerPort: 8080
 
        

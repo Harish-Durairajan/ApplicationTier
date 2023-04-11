@@ -10,6 +10,6 @@ spec:
   type: LoadBalancer
   ports:
     - nodePort: 30515
-      port: 8082
+      targetPort: 8080
 
 
