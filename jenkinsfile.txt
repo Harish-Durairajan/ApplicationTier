@@ -12,11 +12,11 @@ pipeline{
                 userRemoteConfigs: [[url: '${git_url}']])
             }
         }          
-        // stage("docker logging"){
-        //     steps{
-        //         sh "echo harish | sudo -S docker images > /dev/null"
-        //     }
-        // }
+        stage("docker logging"){
+            steps{
+                sh "echo harish | sudo -S docker images > /dev/null"
+            }
+        }
         stage("checking docker deamon running"){
             steps{
                 sh "sudo docker images > /dev/null"
