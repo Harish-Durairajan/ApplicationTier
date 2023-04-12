@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: webserver1
-          image: 'harishdurai/applicationtier:latest'
+          image: '614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest'
+          # image: 'harishdurai/applicationtier:latest'
           ports:
             - containerPort: 8080
 
