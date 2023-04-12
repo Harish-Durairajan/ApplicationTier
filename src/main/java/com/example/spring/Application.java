@@ -11,7 +11,7 @@ public class Application {
 
 	@GetMapping(value = "/spring")
 	public String welcome(){
-		return "Harish";
+		return "Harish devops";
 	}
 
 	public static void main(String[] args) {
