@@ -9,7 +9,7 @@ spec:
     app: spring
   type: NodePort
   ports:
-    - nodePort: 30512
+    - nodePort: 30513
       port: 8080
 
 
