@@ -11,7 +11,7 @@ public class Application {
 
 	@GetMapping(value = "/spring")
 	public String welcome(){
-		return "springboot";
+		return "Harish springboot";
 	}
 
 	public static void main(String[] args) {

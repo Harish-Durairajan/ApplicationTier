@@ -31,10 +31,6 @@ pipeline{
         stage("Logging in ECR "){
             steps{
                 sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 614429738294.dkr.ecr.us-east-2.amazonaws.com"
-                //sh "docker build -t cicd-repository ."
-                //sh "docker tag cicd-repository:latest 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest"
-                //sh "docker push 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest"
-                //sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
         }
         stage("Building the image file"){
@@ -45,15 +41,12 @@ pipeline{
         stage("tagging the image file"){
             steps{
                 sh "docker tag ${imageName} 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
-                //sh "sudo docker tag ${imageName} harishdurai/applicationtier:${tagName} "
             }
         } 
          
         stage("pushing the image in ECR "){
             steps{
-                // sh "docker push 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository:latest"
                 sh "docker push 614429738294.dkr.ecr.us-east-2.amazonaws.com/cicd-repository"
-                //sh "sudo docker push harishdurai/applicationtier:${tagName}"
             }
         } 
         stage("Deploying dockerfile"){
@@ -62,15 +55,5 @@ pipeline{
                 sh "kubectl apply -f springService.yaml"
             }
         }       
-        // stage("pulling the image from docker hub"){
-        //     steps{
-        //         sh "sudo docker pull harishdurai/applicationtier:${tagName}"
-        //     }
-        // }
-        // stage("createing the container"){
-        //     steps{
-        //         sh "sudo docker run --name ${containerName} -p ${port}:8080 -d  ${imageName}:${tagName}"
-        //     }
-        // }
     }
 }
